@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find a common hour for your study group or project team.">
+  <title>TimeMatching System</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="script.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./">Time<span>Matching</span> <small>System</small></a>
+    <div id="account" hidden><span id="user-email"></span> <button id="logout" class="secondary">Sign out</button></div>
+  </header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">FOR STUDY GROUPS & PROJECT TEAMS</p>
+      <h1>Different schedules.<br>One common hour.</h1>
+      <p>Choose when you are free. Find a time together. Get back to what matters.</p>
+      <div class="steps"><span>01 &nbsp; Create a group</span><span>02 &nbsp; Add availability</span><span>03 &nbsp; Meet together</span></div>
+    </section>
+    <p id="message" role="status" aria-live="polite"></p>
+
+    <section id="auth-panel" class="card narrow">
+      <p class="eyebrow">LET'S GET STARTED</p><h2>Your group starts here</h2>
+      <form id="auth-form">
+        <label for="email">Email</label><input id="email" type="email" autocomplete="email" required>
+        <label for="password">Password</label><input id="password" type="password" autocomplete="current-password" minlength="8" required>
+        <p class="hint">New here? Use an email and a password with at least 8 characters, then create an account.</p>
+        <div class="actions"><button type="submit" id="login">Sign in</button><button type="submit" id="register" class="secondary">Create account</button></div>
+      </form>
+    </section>
+
+    <section id="home-panel" class="columns" hidden>
+      <div class="card">
+        <p class="eyebrow">START SOMETHING TOGETHER</p><h2>Create a group</h2>
+        <form id="create-form">
+          <label for="title">What are you meeting for?</label><input id="title" placeholder="DSA discussion" maxlength="60" required>
+          <label for="date">Meeting date</label><input id="date" type="date" required>
+          <label for="host-name">Your name in the group</label><input id="host-name" maxlength="30" required>
+          <button type="submit">Create & invite friends</button>
+        </form>
+      </div>
+      <div class="card">
+        <p class="eyebrow">ALREADY HAVE AN INVITE?</p><h2>Join your friends</h2>
+        <form id="open-form">
+          <label for="invite">Group link or code</label><input id="invite" placeholder="Paste the invite link" required>
+          <button type="submit" class="secondary">Open group</button>
+        </form>
+        <p class="hint">Each person uses their own account. Keep your invite link to reopen the group later.</p>
+      </div>
+    </section>
+
+    <section id="join-panel" class="card narrow" hidden>
+      <p class="eyebrow">YOU'RE INVITED</p><h2 id="join-title"></h2><p id="join-date" class="hint"></p>
+      <form id="join-form"><label for="member-name">Your name in the group</label><input id="member-name" maxlength="30" required><button type="submit">Join this group</button></form>
+      <button class="text-button back" type="button">Back to home</button>
+    </section>
+
+    <section id="room-panel" hidden>
+      <div class="room-heading"><div><p class="eyebrow">YOUR SHARED GROUP</p><h2 id="room-title"></h2><p id="room-date" class="hint"></p></div><div class="actions"><button id="refresh" class="secondary">Refresh group</button><button class="text-button back">Home</button></div></div>
+      <div class="invite-bar"><label for="share-link">Invite friends</label><input id="share-link" readonly><button id="copy-link" class="secondary">Copy link</button></div>
+      <div class="columns">
+        <div class="card">
+          <p class="eyebrow">01 / YOUR AVAILABILITY</p><h3>When can you join?</h3>
+          <p class="hint">Select every one-hour slot you can attend. All times are in India Standard Time (IST).</p>
+          <form id="availability-form"><div id="slots" class="slots"></div><div class="actions"><button type="submit">Save availability</button></div></form>
+          <p id="saved-status" class="hint"></p>
+        </div>
+        <div class="card">
+          <p class="eyebrow">02 / THE GROUP</p><h3 id="member-count">Who's joining?</h3>
+          <ul id="members" class="members"></ul>
+          <p class="hint">After a friend saves changes, press Refresh group to see them.</p>
+        </div>
+      </div>
+      <div class="card results">
+        <p class="eyebrow">03 / FIND YOUR COMMON HOUR</p><h3 id="result-title"></h3><p id="result-note" class="hint"></p><div id="matches" class="match-list"></div>
+        <form id="meeting-form" hidden>
+          <h3>Set the meeting</h3><p class="hint">The creator chooses a common time and adds the call link.</p>
+          <label for="meeting-time">Common time</label><select id="meeting-time" required></select>
+          <label for="meeting-url">Zoom, Discord or Google Meet link</label><input id="meeting-url" type="url" placeholder="https://meet.google.com/..." maxlength="300" required>
+          <button type="submit">Save meeting</button>
+        </form>
+        <div id="meeting" class="meeting" hidden><div><p class="eyebrow">READY TO MEET</p><h3 id="chosen-time"></h3><p class="hint">This saved time fits everyone's latest submitted availability.</p></div><a id="call-link" class="button" target="_blank" rel="noopener noreferrer">Open meeting</a></div>
+      </div>
+    </section>
+  </main>
+  <footer>A little less scheduling. A little more time together.</footer>
+</body>
+</html>
